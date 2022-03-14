@@ -1,0 +1,60 @@
+/* .centered {
+  position: absolute; or absolute
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+} */
+
+#timer_div {
+  font-size: 1000%;
+  font-weight: bold;
+  /* text-justify: center;
+  position: relative; or absolute
+  left: 50%;
+  transform: translate(-50%, 0); */
+}
+
+#win_div {
+  font-size: 500%;
+}
+
+body {
+  overflow: hidden; /* Hide scrollbar */
+}
+
+#boom_img {
+  width: 30%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+#input_code_field {
+  width: 100%;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* body {
+  animation: mymove 5s infinite;
+}
+
+@keyframes mymove {
+  from {
+    background-color: red;
+  }
+  to {
+    background-color: yellow;
+  }
+} */
