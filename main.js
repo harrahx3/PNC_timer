@@ -52,9 +52,14 @@ function countDown() {
   }
 }
 
+function changeBackgroundColor(color) {
+  document.getElementById('back').style.backgroundColor = color;
+  document.body.backgroundColor = color;
+}
+
 function warning() {
-  background = background == "red" ? "yellow" : "red";
-  document.body.style.backgroundColor = background;
+  background = (background == "red") ? "black" : "red";
+  changeBackgroundColor(background);
 }
 
 function win() {
@@ -85,21 +90,24 @@ function boom() {
 function reset() {
   timer = 10 * 60; // 60 minutes
   localStorage["timer"] = timer;
-  background = "red";
+  background = "black";
   hide(win_div);
   show(not_good_div);
   show(input_code);
   hide(boom_div);
   show(start_btn);
   displayTimer();
+  changeBackgroundColor(background);
 }
 
 let timer = localStorage["timer"]; // 60 minutes
 let background;
 let warningTimer;
 let countDownTimer;
-const correct_code = 1234;
+const correct_code = 3671;
 const alert_text =
+  "<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>Not correct!</strong> Wrong code, Try again !<button type='button' class='close' onclick='input_code_field.focus();' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+const alert_text_too_short =
   "<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>Not correct!</strong> Wrong code, Try again !<button type='button' class='close' onclick='input_code_field.focus();' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 
 let timerElement = document.getElementById("timer");
@@ -113,6 +121,7 @@ let boom_div = document.getElementById("boom_div");
 
 start_btn.addEventListener("click", (event) => {
   event.preventDefault();
+  document.backgroundColor = "black";
   countDownTimer = setInterval(countDown, 100);
   hide(start_btn);
   input_code_field.focus();
