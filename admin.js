@@ -1,4 +1,5 @@
-document.getElementById('correct_code').value = localStorage.getItem('correct_code');
+document.getElementById('correct_code').value = localStorage.getItem('correct_code') ? localStorage.getItem('correct_code') : "3671";
+document.getElementById('label_timer').value = localStorage.getItem('timer') ? localStorage.getItem('timer') + ' seconds' : "timer not set";
 
 document.getElementById('update_correct_code_btn').addEventListener('click', (event) => {
 	event.preventDefault();

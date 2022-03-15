@@ -1,5 +1,5 @@
 const correct_code_default = '3671'; // correct code to stop the timer (4 digits)
-const correct_code = (localStorage.getItem('correct_code').length > 0) ? localStorage.getItem('correct_code') : localStorage.getItem('correct_code').length ; // correct code to stop the timer (4 digits)
+const correct_code = (localStorage.getItem('correct_code')) ? localStorage.getItem('correct_code') : correct_code_default ; // correct code to stop the timer (4 digits)
 const timer_start = 60 * 60; // 1 hour = 60 minutes = 3600 seconds
 let speed = 10; // speed of timer: 1 = normal speed, 10 = 10 times faster, ...
 
@@ -48,6 +48,12 @@ function countDown() {
 	timer -= 1;
 	localStorage['timer'] = timer;
 	displayTimer();
+  let hours = Math.floor(timer / 3600);
+	let minutes = Math.floor((timer - 3600 * hours) / 60);
+  if (timer > 0 && (minutes == (timer - 3600 * hours) / 60) ) {
+    var audio_bip = new Audio('assets/bip.wav');
+    audio_bip.play();
+  }
 	// only 5 minutes left -> start blinking
 	if (timer == 60 * 5) {
 		warningTimer = setInterval(warning, 700);
@@ -96,10 +102,12 @@ function boom() {
 	hide(win_div);
 	hide(input_code);
 	hide(not_good_div);
-	show(boom_div);
+	//show(boom_div);
 	hide(start_btn);
-	var audio = new Audio('assets/explosion.mp3');
-	audio.play();
+  hide(timerElement);
+	var audio_boom = new Audio('assets/explosion.mp3');
+	audio_boom.play();
+  document.getElementById('back').style.backgroundImage = "url('assets/bigboom.jpg')";
 }
 
 // Reset everything
@@ -112,13 +120,14 @@ function reset() {
 	show(input_code);
 	hide(boom_div);
 	show(start_btn);
+  show(timerElement);
 	displayTimer();
 	changeBackgroundColor(background);
 	input_code_field.value = '';
 }
 
 // Define global variables
-let timer = localStorage['timer'];
+let timer = localStorage['timer'] ? localStorage['timer'] : timer_start;
 let background;
 let warningTimer;
 let countDownTimer;

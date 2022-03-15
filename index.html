@@ -31,7 +31,7 @@
           <div class="btn-group-vertical mt-4 mb-4">
             <form id="form">
               <div class="btn-group justify-content-center row col-md-10">
-                <input type="number" oninput="if(this.value.length > this.maxLength) {this.value = this.value.slice(0, this.maxLength)};" autofocus style="font-size: 40px" class="text-center form-control-lg mb-2" id="code" id="sID" value="" name="code" placeholder="Enter Code:" maxlength="4"/>
+                <input type="number" oninput="if(this.value.length > this.maxLength) {this.value = this.value.slice(0, this.maxLength)};" style="font-size: 40px" class="text-center form-control-lg mb-2" id="code" id="sID" value="" name="code" placeholder="Enter Code:" maxlength="4"/>
               </div>
               <div class="btn-group">
                 <button type="button" class="num btn btn-outline-secondary py-3" onclick="addNumberInInput(1);">
@@ -95,7 +95,7 @@
     </div>
 
       <div class="col-md-10 d-flex justify-content-center text-center m-5">
-        <button id="start_btn" type="button" class="btn btn-primary btn-lg" style="height: 3em;">
+        <button autofocus id="start_btn" type="button" class="btn btn-primary btn-lg" style="height: 3em;">
           Start
         </button>
       </div>
