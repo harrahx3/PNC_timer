@@ -77,7 +77,7 @@ function boom() {
 }
 
 function reset() {
-  timer = .5 * 60; // 60 minutes
+  timer = 10 * 60; // 60 minutes
   localStorage["timer"] = timer;
   background = "red";
   hide(win_div);
