@@ -15,6 +15,12 @@ function addNumberInInput(newNumber) {
   if (input_code_field.value < 999) {
     input_code_field.value = input_code_field.value + newNumber;
   }
+  input_code_field.focus();
+}
+
+function clearInput() {
+  input_code_field.value = "";
+  input_code_field.focus();
 }
 
 function displayTimer() {
@@ -61,7 +67,7 @@ function win() {
 }
 
 function not_correct() {
-  input_code_field.value = "";
+  clearInput();
   not_good_div.innerHTML = alert_text;
 }
 
@@ -94,11 +100,11 @@ let warningTimer;
 let countDownTimer;
 const correct_code = 1234;
 const alert_text =
-  "<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>Not correct!</strong> Wrong code, Try again !<button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
+  "<div class='alert alert-warning alert-dismissible fade show' role='alert'><strong>Not correct!</strong> Wrong code, Try again !<button type='button' class='close' onclick='input_code_field.focus();' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button></div>";
 
 let timerElement = document.getElementById("timer");
 let start_btn = document.getElementById("start_btn");
-let submit_code_vtn = document.getElementById("submit_code_vtn");
+let submit_code_btn = document.getElementById("submit_code_vtn");
 let input_code = document.getElementById("input_code");
 let input_code_field = document.getElementById("code");
 let not_good_div = document.getElementById("not_good_div");
@@ -109,15 +115,17 @@ start_btn.addEventListener("click", (event) => {
   event.preventDefault();
   countDownTimer = setInterval(countDown, 100);
   hide(start_btn);
+  input_code_field.focus();
 });
 
-submit_code_vtn.addEventListener("click", (event) => {
+submit_code_btn.addEventListener("click", (event) => {
   event.preventDefault();
   let user_code = input_code_field.value;
   if (user_code == correct_code) {
     win();
   } else {
     not_correct();
+    input_code_field.focus();
   }
 });
 
