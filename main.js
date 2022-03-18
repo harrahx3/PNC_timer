@@ -129,10 +129,11 @@ function reset() {
 
 function waitVideoEnd() {
   if (video.ended) {
+    document.exitFullscreen().then(() => {console.log('hello');; input_code_field.focus();});
     hide(video);
     countDownTimer = setInterval(countDown, 1000/speed);
-    input_code_field.focus();
     clearInterval(waitVideoEndTimer);
+    // input_code_field.focus();
   }
 }
 
@@ -171,10 +172,11 @@ submit_code_btn.addEventListener('click', (event) => {
 	if (user_code == correct_code) {
 		win();
 	} else {
-		let err = user_code.length < 4 ? 'Code should be 4 digits' : 'Wrong code';
+		let err = (user_code.length < 4) ? 'Code should be 4 digits' : 'Wrong code';
 		not_correct(err);
 		input_code_field.focus();
 	}
 });
 
+// document.getElementById('back').requestFullscreen();
 reset();
