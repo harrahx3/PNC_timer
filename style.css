@@ -16,11 +16,15 @@
   /* url('webfont.svg#svgFontName') format('svg'); Legacy iOS */
 }
 
+#back {
+  height: 100vh; 
+}
+
 #input_code {
   background-color: white;
 }
 
-#timer_div {
+#timer {
   font-size: 1000%;
   font-weight: bold;
   font-family: "MyWebFont";
@@ -35,12 +39,26 @@
 
 #win_div {
   font-size: 500%;
+  color: white;
 }
 
 html,
 body {
   overflow-x: hidden; /* Hide scrollbar */
-  background: black;
+  /* background: black; */
+}
+
+#back {
+  /* The image used */
+  /* background-image: url("assets/bigboom.jpg"); */
+
+  /* Full height */
+  /* height: 100%; */
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 #boom_img {
