@@ -121,9 +121,19 @@ function reset() {
 	hide(boom_div);
 	show(start_btn);
   show(timerElement);
+  hide(video);
 	displayTimer();
 	changeBackgroundColor(background);
 	input_code_field.value = '';
+}
+
+function waitVideoEnd() {
+  if (video.ended) {
+    hide(video);
+    countDownTimer = setInterval(countDown, 1000/speed);
+    input_code_field.focus();
+    clearInterval(waitVideoEndTimer);
+  }
 }
 
 // Define global variables
@@ -131,6 +141,7 @@ let timer = localStorage['timer'] ? localStorage['timer'] : timer_start;
 let background;
 let warningTimer;
 let countDownTimer;
+let waitVideoEndTimer = setInterval(waitVideoEnd, 500);
 
 let timerElement = document.getElementById('timer');
 let start_btn = document.getElementById('start_btn');
@@ -140,12 +151,15 @@ let input_code_field = document.getElementById('code');
 let not_good_div = document.getElementById('not_good_div');
 let win_div = document.getElementById('win_div');
 let boom_div = document.getElementById('boom_div');
+let video = document.getElementById('video_intro');
 
 // When click on start buton -> start timer
 start_btn.addEventListener('click', (event) => {
 	event.preventDefault();
 	document.backgroundColor = 'black';
-	countDownTimer = setInterval(countDown, 1000/speed);
+  show(video);
+  video.requestFullscreen();
+  video.play();
 	hide(start_btn);
 	input_code_field.focus();
 });
