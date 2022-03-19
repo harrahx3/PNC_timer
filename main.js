@@ -3,7 +3,7 @@ const correct_code = localStorage.getItem("correct_code")
   ? localStorage.getItem("correct_code")
   : correct_code_default; // correct code to stop the timer (4 digits)
 const timer_start = 60 * 60; // 1 hour = 60 minutes = 3600 seconds
-let speed = 20; // speed of timer: 1 = normal speed, 10 = 10 times faster, ...
+let speed = 1; // speed of timer: 1 = normal speed, 10 = 10 times faster, ...
 
 function show(elmt) {
   elmt.style.display = "block";
