@@ -3,7 +3,7 @@ const correct_code = localStorage.getItem("correct_code")
   ? localStorage.getItem("correct_code")
   : correct_code_default; // correct code to stop the timer (4 digits)
 const timer_start = 60 * 60; // 1 hour = 60 minutes = 3600 seconds
-let speed = 1; // speed of timer: 1 = normal speed, 10 = 10 times faster, ...
+let speed = 20; // speed of timer: 1 = normal speed, 10 = 10 times faster, ...
 
 function show(elmt) {
   elmt.style.display = "block";
@@ -52,7 +52,8 @@ function countDown() {
   displayTimer();
   let hours = Math.floor(timer / 3600);
   let minutes = Math.floor((timer - 3600 * hours) / 60);
-  if (timer > 0 && minutes == (timer - 3600 * hours) / 60) {
+  let seconds = Math.floor(timer - 3600 * hours - 60 * minutes);
+  if (timer > 0 && timer <= 30*60 && minutes%5 == 0 && seconds == 0) {
     var audio_bip = new Audio("assets/bip.wav");
     audio_bip.play();
   }
@@ -132,15 +133,26 @@ function reset() {
 
 function waitVideoEnd() {
   if (video.ended) {
-    document.exitFullscreen().then(() => {
+    document.exitFullscreen().finally(() => {
       console.log("hello");
       input_code_field.focus();
+      hide(video);
+      document.getElementById('back').requestFullscreen();
     });
     hide(video);
     countDownTimer = setInterval(countDown, 1000 / speed);
     clearInterval(waitVideoEndTimer);
     // input_code_field.focus();
   }
+}
+
+function start() {
+  document.backgroundColor = "black";
+  show(video);
+  video.requestFullscreen();
+  video.play();
+  hide(start_btn);
+  input_code_field.focus();
 }
 
 // Define global variables
@@ -163,12 +175,7 @@ let video = document.getElementById("video_intro");
 // When click on start buton -> start timer
 start_btn.addEventListener("click", (event) => {
   event.preventDefault();
-  document.backgroundColor = "black";
-  show(video);
-  video.requestFullscreen();
-  video.play();
-  hide(start_btn);
-  input_code_field.focus();
+  start();
 });
 
 // When click on submit buton -> check if code is correct
@@ -186,3 +193,4 @@ submit_code_btn.addEventListener("click", (event) => {
 
 // document.getElementById('back').requestFullscreen();
 reset();
+// start();
