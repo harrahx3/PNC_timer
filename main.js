@@ -53,7 +53,7 @@ function countDown() {
   let hours = Math.floor(timer / 3600);
   let minutes = Math.floor((timer - 3600 * hours) / 60);
   let seconds = Math.floor(timer - 3600 * hours - 60 * minutes);
-  if (timer > 0 && timer <= 30*60 && minutes%5 == 0 && seconds == 0) {
+  if (timer > 0 && timer <= 20*60 && minutes%5 == 0 && seconds == 0) {
     var audio_bip = new Audio("assets/bip.wav");
     audio_bip.play();
   }
