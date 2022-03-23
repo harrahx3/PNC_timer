@@ -129,6 +129,7 @@ function reset() {
   displayTimer();
   changeBackgroundColor(background);
   input_code_field.value = "";
+  triesLeft = 5;
 }
 
 function waitVideoEnd() {
@@ -146,6 +147,14 @@ function waitVideoEnd() {
   }
 }
 
+function decreaseTriesLeft() {
+  triesLeft -= 1;
+  // document.getElementById('tries_left').textContent = triesLeft;
+  if (triesLeft <= 0) {
+    boom();
+  }
+}
+
 function start() {
   document.backgroundColor = "black";
   show(video);
@@ -157,6 +166,7 @@ function start() {
 
 // Define global variables
 let timer = localStorage["timer"] ? localStorage["timer"] : timer_start;
+let triesLeft;
 let background;
 let warningTimer;
 let countDownTimer;
@@ -184,8 +194,13 @@ submit_code_btn.addEventListener("click", (event) => {
   let user_code = input_code_field.value;
   if (user_code == correct_code) {
     win();
+  } else if (user_code.length < 4) {
+    let err = "Code should be 4 digits";
+    not_correct(err);
+    input_code_field.focus();
   } else {
-    let err = user_code.length < 4 ? "Code should be 4 digits" : "Wrong code";
+    decreaseTriesLeft();
+    let err = "Wrong code, You have only <b>" + triesLeft + "</b> tries left";
     not_correct(err);
     input_code_field.focus();
   }
